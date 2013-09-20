@@ -89,16 +89,16 @@ class ZipCodeDatabase(object):
             q = "SELECT * FROM ZipCodes"
         elif state and city:
             q = "SELECT * FROM ZipCodes WHERE city%(cmp)s? AND state%(cmp)s?" % {'cmp': cmp}
-
-        if city is None:
-            q = "SELECT * FROM ZipCodes WHERE state%s?" % cmp
         else:
-            city = city.upper()
+            if city is None:
+                q = "SELECT * FROM ZipCodes WHERE state%s?" % cmp
+            else:
+                city = city.upper()
 
-        if state is None:
-            q = "SELECT * FROM ZipCodes WHERE city%s?" % cmp
-        else:
-            state = state.upper()
+            if state is None:
+                q = "SELECT * FROM ZipCodes WHERE city%s?" % cmp
+            else:
+                state = state.upper()
 
         if limit is not None:
             q+= ' LIMIT 0, %d' % limit
