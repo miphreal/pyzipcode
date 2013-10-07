@@ -3,7 +3,6 @@ try:
     import sqlite3
 except ImportError:
     from pysqlite2 import dbapi2 as sqlite3
-import math
 import time
 
 class ConnectionManager(object):
@@ -85,9 +84,9 @@ class ZipCodeDatabase(object):
 
     def find_zip(self, city=None, state=None, limit=None, exact=False):
         cmp = ' LIKE ' if not exact else '='
-        if not city and not state:
+        if city is None and state is None:
             q = "SELECT * FROM ZipCodes"
-        elif state and city:
+        elif state is not None and city is not None:
             q = "SELECT * FROM ZipCodes WHERE city%(cmp)s? AND state%(cmp)s?" % {'cmp': cmp}
         else:
             if city is None:
@@ -103,7 +102,7 @@ class ZipCodeDatabase(object):
         if limit is not None:
             q+= ' LIMIT 0, %d' % limit
 
-        args = [arg for arg in [city, state] if arg]
+        args = [arg for arg in [city, state] if arg is not None]
         return format_result(self.conn_manager.query(q, args))
 
     def get(self, zip):
