@@ -1,0 +1,7 @@
+.~*
+*.py[co]
+zip_code_database.csv
+build
+dist
+.python-version
+.idea

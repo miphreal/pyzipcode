@@ -1,6 +1,14 @@
 ChangeLog
 =========
 
+
+0.5
+---
+
+* Totally refactored
+* Updated db
+
+
 0.4
 ---
 
@@ -9,8 +17,6 @@ ChangeLog
 * now also keeps timezone and dst values
 
 * longitude and latitude is now contains negative numbers
-
-* 
 
 
 0.3
